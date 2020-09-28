@@ -1,10 +1,11 @@
 ## Biorhythm Calculator on Ruby
 
-To get arrays of dates and biorhythm values, call these methods:
+To get arrays of dates and biorhythm values, call these method:
 
 ```bash
-values = BiorhythmsCalc.get_values_and_dates(params[:birthday])[0]
-dates = BiorhythmsCalc.get_values_and_dates(params[:birthday])[1]
+arr = BiorhythmsCalc.get_values_and_dates(params[:birthday])
+@values = arr[0]
+@dates = arr.delete_at(1)
 flash.now[:notice] = BiorhythmsCalc.flash_message(params[:birthday])
 ```
 
