@@ -1,6 +1,6 @@
 class BiorhythmsCalc
   def self.day_counter(x, birthday)
-    Integer(Date.today + x - birthday)
+    Integer(Date.today + x - birthday.to_date)
   end
 
   def self.get_values_and_dates(birthday)
@@ -26,7 +26,7 @@ class BiorhythmsCalc
     'Today, ' +
       Time.new.strftime('%d of %B, %Y').to_s +
       ', you have lived ' +
-      Integer(Date.today - birthday.to_date).to_s +
+      BiorhythmsCalc.day_counter(0, birthday).to_s +
       ' days.'
   end
 end
