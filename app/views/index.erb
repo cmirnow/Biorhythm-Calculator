@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Biorhytm Calculator on Sinatra</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<% if params[:birthday].nil? %>
+<small><%= Time.new.strftime("%d of %B, %Y") %></small>
+    <h1>Biorhythm Calculator</h1>
+    <main class="container">
+      <div class="row">
+        <div class="waveWrapper waveAnimation">
+          <div class="waveWrapperInner bgTop">
+            <div class="wave waveTop" style="background-image: url('/images/wave-top.png')"></div>
+          </div>
+          <div class="waveWrapperInner bgMiddle">
+            <div class="wave waveMiddle" style="background-image: url('/images/wave-mid.png')"></div>
+          </div>
+          <div class="waveWrapperInner bgBottom">
+            <div class="wave waveBottom" style="background-image: url('/images/wave-bot.png')"></div>
+          </div>
+        </div>
+        <ul class="list-group" style="padding-top: 3%">
+          <li class="list-group-item active">The charts display a period of 3 days before and 15 days after the target date. Positive periods of the cycle indicate high ability days and its negative periods show low ability days. Near zero means critical days. It is said that human body has three rhythms with a fixed cycle:</li>
+          <li class="list-group-item">1. Physical biorhythm (23-day cycles) is related to physical strength, durability, resistance, stamina, courage and etc.</li>
+          <li class="list-group-item">2. Emotional biorhythm (28-day cycles) is related to emotional stability, feeling, intuition, mood, susceptibility, creativity and etc.</li>
+          <li class="list-group-item">3. Intellectual biorhythm (33-day cycles) is related to thinking, analyzing, judgment, concentration, composition and etc.</li>
+          <li class="list-group-item">
+            <form action='/' method='post'>
+              <input data-date-format="dd-mm-yyyy" id="datepicker" name="birthday" value="01-01-2000">
+              <input type="submit" class="btn btn-light" value="Go ahead" /> </form>
+          </li>
+          <li class="list-group-item"><small class="pull-right">Service description: <a href="https://masterpro.ws/biorhythm-calculator-ruby" target="_blank">Masterpro.ws project</a></small></li>
+        </ul>
+      </div>
+    </main>
+<% else %>
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="https://code.highcharts.com/modules/series-label.js"></script>
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/modules/export-data.js"></script>
+      <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description"> The charts display a period of 3 days before and 14 days after the target date. Positive periods of the cycle indicate high ability days and its negative periods show low ability days. Near zero means critical days. It is said that human body has three rhythms with a fixed cycle. </p>
+      </figure>
+      <script>
+      Highcharts.chart('container', {
+        chart: {
+          type: 'spline'
+        },
+        title: {
+          text: 'Biorhythm Calculator'
+        },
+        subtitle: {
+          text: 'Masterpro.ws project'
+        },
+        xAxis: {
+          categories: [<%= @dates %>]
+        },
+        yAxis: {
+          title: {
+            text: 'Biorhythm Phase'
+          },
+          labels: {
+            formatter: function() {
+              return this.value + '°';
+            }
+          }
+        },
+        tooltip: {
+          crosshairs: true,
+          shared: true
+        },
+        plotOptions: {
+          spline: {
+            marker: {
+              radius: 4,
+              lineColor: '#666666',
+              lineWidth: 1
+            }
+          }
+        },
+        series: [{
+          name: 'Physical',
+          marker: {
+            symbol: 'diamond'
+          },
+          data: <%= @values[0] %>
+        }, {
+          name: 'Emotional',
+          marker: {
+            symbol: 'diamond'
+          },
+          data: <%= @values[1] %>
+        }, {
+          name: 'Intellectual',
+          marker: {
+            symbol: 'diamond'
+          },
+          data: <%= @values[2] %>
+        }]
+      });
+      </script>
+      <table class="table table-condensed table-hover text-center" id="table">
+        <thead>
+          <tr>
+            <% ['', 'Physical','Emotional','Intellectual'].each do |header| %>
+              <th>
+                <%= header %>
+              </th>
+              <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @values.transpose.each_with_index do |x, index| %>
+            <tr>
+              <th scope="row">
+                <%= @dates.split(",")[index].gsub("`", "") %>
+              </th>
+              <% x.each do |i| %>
+                <td>
+                  <%= i %>
+                </td>
+                <% end %>
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+      <table class="legend">
+        <tbody>
+          <tr>
+            <td class="l_ico">
+              <div class="l_outer">
+                <div class="l_inner critical1"></div>
+              </div>
+            </td>
+            <td> - critical day </td>
+          </tr>
+          <tr>
+            <td class="l_ico">
+              <div class="l_outer">
+                <div class="l_inner critical2"></div>
+              </div>
+            </td>
+            <td> - "double" critical day </td>
+          </tr>
+          <tr>
+            <td class="l_ico">
+              <div class="l_outer">
+                <div class="l_inner critical3"></div>
+              </div>
+            </td>
+            <td> - "triple" critical day </td>
+          </tr>
+        </tbody>
+      </table>
+      <script src="/javascripts/colored_rows_for_table.js"></script>
+<% end %>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
