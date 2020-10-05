@@ -9,6 +9,7 @@ cd Biorhythm-Calculator
 bundle install
 bundle exec shotgun
 ```
+...and go to http://localhost:9393
 
 To get arrays of dates and biorhythm values, call these method:
 
