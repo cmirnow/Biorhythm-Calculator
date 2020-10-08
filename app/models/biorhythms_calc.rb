@@ -19,33 +19,30 @@ class BiorhythmsCalc
   end
 
   def self.calculation(*args)
-  	(Math.sin(2 * Math::PI * BiorhythmsCalc.day_counter(args[0], args[1]) / args[2]) * 100).round(2)
+  	(Math.sin(2 * Math::PI * BiorhythmsCalc.day_counter(args[0], args[1].to_date) / args[2]) * 100).round(2)
   end
 
   def self.get_date_period(x)
   # Sinatra:
   	(Date.today + x)
   # Rails: 
-  # (Date.today + x).to_formatted_s(:short) 
+  # (Date.today + x).to_formatted_s(:short)
   end
 
   def self.day_counter(*args)
-    Integer(Date.today + args[0] - args[1].to_date)
+    Integer(Date.today + args[0] - args[1])
   end
 
   def self.todays_date(b)
   	Date.strptime(b, '%d-%m-%Y')
   end
 
-  def self.flash_message(b)
+  def self.alert(b)
     'Today, ' +
       Time.new.strftime('%d of %B, %Y').to_s +
       ', you have lived ' +
-      # Rails:
-      # BiorhythmsCalc.day_counter(0, b).to_s +
-      # Sinatra:
-      (Date.today - todays_date(b)).to_i.to_s +
+      BiorhythmsCalc.day_counter(0, todays_date(b)).to_s +
       ' days.'
   end
-
 end
+
