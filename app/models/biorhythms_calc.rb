@@ -34,17 +34,20 @@ class BiorhythmsCalc
   end
 
   def self.todays_date(b)
-  	Date.strptime(b, '%d-%m-%Y').to_date
+  	Date.strptime(b, '%d-%m-%Y')
   end
 
-=begin 
+
 # FOR RUBY ON RAILS:
   def self.flash_message(b)
     'Today, ' +
       Time.new.strftime('%d of %B, %Y').to_s +
       ', you have lived ' +
-      BiorhythmsCalc.day_counter(0, b).to_s +
+      # Rails:
+      # BiorhythmsCalc.day_counter(0, b).to_s +
+      # Sinatra:
+      (Date.today - todays_date(b)).to_i.to_s +
       ' days.'
   end
-=end
+
 end

@@ -47,6 +47,9 @@
         <div id="container"></div>
         <p class="highcharts-description"> The charts display a period of 3 days before and 14 days after the target date. Positive periods of the cycle indicate high ability days and its negative periods show low ability days. Near zero means critical days. It is said that human body has three rhythms with a fixed cycle. </p>
       </figure>
+      <div class="alert alert-info" role="alert">
+<%= @message %>
+      </div>
       <script>
       Highcharts.chart('container', {
         chart: {

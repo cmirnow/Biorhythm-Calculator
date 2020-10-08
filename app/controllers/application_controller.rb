@@ -13,6 +13,7 @@ class ApplicationController < Sinatra::Base
       arr = BiorhythmsCalc.get_values_and_dates(params[:birthday])
       @values = arr[0]
       @dates = arr.delete_at(1)
+      @message = BiorhythmsCalc.flash_message(params[:birthday])
     end
     erb :index
   end
