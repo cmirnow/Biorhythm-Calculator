@@ -11,13 +11,4 @@ bundle exec shotgun
 ```
 ...and go to http://localhost:9393
 
-To get arrays of dates and biorhythm values, call these method:
-
-```bash
-arr = BiorhythmsCalc.get_values_and_dates(params[:birthday])
-@values = arr[0]
-@dates = arr.delete_at(1)
-@message = BiorhythmsCalc.alert(params[:birthday])
-```
-
 [Description](https://masterpro.ws/biorhythm-calculator-ruby) (in Russian).
