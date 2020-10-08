@@ -37,8 +37,6 @@ class BiorhythmsCalc
   	Date.strptime(b, '%d-%m-%Y')
   end
 
-
-# FOR RUBY ON RAILS:
   def self.flash_message(b)
     'Today, ' +
       Time.new.strftime('%d of %B, %Y').to_s +
