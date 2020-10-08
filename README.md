@@ -17,7 +17,7 @@ To get arrays of dates and biorhythm values, call these method:
 arr = BiorhythmsCalc.get_values_and_dates(params[:birthday])
 @values = arr[0]
 @dates = arr.delete_at(1)
-flash.now[:notice] = BiorhythmsCalc.flash_message(params[:birthday])
+@message = BiorhythmsCalc.alert(params[:birthday])
 ```
 
 [Description](https://masterpro.ws/biorhythm-calculator-ruby) (in Russian).
