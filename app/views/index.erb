@@ -5,7 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <% if params[:birthday].nil? %>
@@ -24,6 +26,7 @@
             <div class="wave waveBottom" style="background-image: url('/images/wave-bot.png')"></div>
           </div>
         </div>
+        <div class="col">
         <ul class="list-group" style="padding-top: 3%">
           <li class="list-group-item active">The charts display a period of 3 days before and 15 days after the target date. Positive periods of the cycle indicate high ability days and its negative periods show low ability days. Near zero means critical days. It is said that human body has three rhythms with a fixed cycle:</li>
           <li class="list-group-item">1. Physical biorhythm (23-day cycles) is related to physical strength, durability, resistance, stamina, courage and etc.</li>
@@ -31,18 +34,23 @@
           <li class="list-group-item">3. Intellectual biorhythm (33-day cycles) is related to thinking, analyzing, judgment, concentration, composition and etc.</li>
           <li class="list-group-item">
             <form action='/' method='post'>
-              <input data-date-format="dd-mm-yyyy" id="datepicker" name="birthday" value="01-01-2000">
-              <input type="submit" class="btn btn-light" value="Go ahead" /> </form>
+              <input data-date-format="dd-mm-yyyy" id="datepicker" name="birthday">
+              <input type="submit" class="btn btn-light" value="Go ahead" />
+            </form>
           </li>
           <li class="list-group-item"><small class="pull-right">Service description: <a href="https://masterpro.ws/biorhythm-calculator-ruby" target="_blank">Masterpro.ws project</a></small></li>
         </ul>
       </div>
+      </div>
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="/javascripts/datepicker.js"></script>
 <% else %>
       <script src="https://code.highcharts.com/highcharts.js"></script>
       <script src="https://code.highcharts.com/modules/series-label.js"></script>
       <script src="https://code.highcharts.com/modules/exporting.js"></script>
       <script src="https://code.highcharts.com/modules/export-data.js"></script>
+      <script src="/javascripts/hide_last_row.js"></script>
       <figure class="highcharts-figure">
         <div id="container"></div>
         <p class="highcharts-description"> The charts display a period of 3 days before and 14 days after the target date. Positive periods of the cycle indicate high ability days and its negative periods show low ability days. Near zero means critical days. It is said that human body has three rhythms with a fixed cycle. </p>
@@ -163,6 +171,6 @@
       </table>
       <script src="/javascripts/colored_rows_for_table.js"></script>
 <% end %>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
