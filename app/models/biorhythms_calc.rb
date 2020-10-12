@@ -23,8 +23,7 @@ class BiorhythmsCalc
   end
 
   def self.get_date_period(x)
-  # Sinatra:
-  	(Date.today + x)
+  	Date.today + x
   # Rails: 
   # (Date.today + x).to_formatted_s(:short)
   end
