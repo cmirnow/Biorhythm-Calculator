@@ -116,7 +116,7 @@
         }]
       });
       </script>
-      <table class="table table-condensed table-hover text-center" id="table">
+      <table class="table table-condensed table-hover" id="table">
         <thead>
           <tr>
             <% ['', 'Physical','Emotional','Intellectual'].each do |header| %>
@@ -130,7 +130,7 @@
           <% @values.transpose.each_with_index do |x, index| %>
             <tr>
               <th scope="row">
-                <%= @dates.split(",")[index].gsub("`", "") %>
+                <%= Date.parse(@dates.split(",")[index]).strftime("%d of %B %Y, %A") %>
               </th>
               <% x.each do |i| %>
                 <td>
